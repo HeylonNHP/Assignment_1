@@ -28,6 +28,9 @@ function main()
         else if user_input (to lowercase) == "a"
             (add new item to stock)
 
+        display menu
+        get user_input
+
     (save to csv)
     display amount of items saved message
     display goodbye message
