@@ -6,6 +6,9 @@ https://github.com/HeylonNHP/Assignment_1
 21/03/16
 """
 
+ITEMS_FILE_NAME = "items.csv"
+MENU = "Menu:\n(L)ist all items\n(H)ire an item\n(R)eturn an item\n(A)dd new item to stock\n(Q)uit"
+
 """
 Pseudocode function load_items:
 
@@ -15,7 +18,7 @@ function load_itemsfilename)
     for each line in filename.readlines()
         strip white spaces and new line chars from line
         line_item_list = split line by ","
-        append line_item_list to file_lines_list
+        append line_item_list converted to tuple to file_lines_list
     close file_in
     return file_lines_list
 """
@@ -46,9 +49,16 @@ function main()
             display items on file
             count = 0
             for each item in items_list
-                display count + " - " + item[0] + " (" + item[1] + ") = $ " + item[3]
+                display count + " - " + item[0] + " (" + item[1] + ") = $ " + item[2]
         else if user_input (to lowercase) == "h"
-            (hire an item)
+            count = 0
+            for each item in items_list
+                if item[3] == in
+                    display count + " - " + item[0] + " (" + item[1] + ") = $ " + item[2]
+            display enter item number
+            get item_choice
+            items_list[item_choice] = [items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out"]
+            display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
         else if user_input (to lowercase) == "r"
             (return an item)
         else if user_input (to lowercase) == "a"
@@ -63,7 +73,12 @@ function main()
 
 """
 def main():
-    pass
+    print("Items for hire - By Heylon White")
+    items_list = load_items(ITEMS_FILE_NAME)
+    print("{} items loaded from {}".format(len(items_list),ITEMS_FILE_NAME))
+
+    print(MENU)
+
 
 main()
 
