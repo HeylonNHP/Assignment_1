@@ -15,10 +15,18 @@ Pseudocode function load_items:
 function load_itemsfilename)
     file_lines_list = []
     open filename as file_in for reading
+
     for each line in filename.readlines()
         strip white spaces and new line chars from line
         line_item_list = split line by ","
+
+        line_item_list[0] = string of line_item_list[0]
+        line_item_list[1] = string of line_item_list[1]
+        line_item_list[2] = float of line_item_list[2]
+        line_item_list[3] = string of line_item_list[3]
+
         append line_item_list converted to tuple to file_lines_list
+
     close file_in
     return file_lines_list
 """
@@ -48,17 +56,27 @@ Pseudocode function main:
 function main()
     display welcome message
 
-    items_list = load_items(FILENAME)
-    display length of items_list + "items loaded from items.csv"
+    items_list = load_items(ITEMS_FILE_NAME)
+    display length of items_list + "items loaded from " + ITEMS_FILE_NAME
 
     display menu
     get user_input (to lowercase)
-    while not user_input == "q"
+
+    while user_input != "q"
         if user_input == "l"
             display items on file
             count = 0
+
             for each item in items_list
-                display count + " - " + item[0] + " (" + item[1] + ") = $ " + item[2]
+                if item[0] == out
+                    hire_status = "*"
+                else
+                    hire_status = ""
+
+                item_description = item[0] + "(" + item[1] + ")"
+                display count + " - " + item_description (formatted to 39 spaces) + " = $ " + item[2] (formatted to 7 spaces and 2 decimal places) + " " + hire_status
+                count += 1
+
         else if user_input == "h"
             count = 0
             for each item in items_list
