@@ -12,7 +12,7 @@ MENU = "Menu:\n(L)ist all items\n(H)ire an item\n(R)eturn an item\n(A)dd new ite
 """
 Pseudocode function load_items:
 
-function load_itemsfilename)
+function load_items(filename)
     file_lines_list = []
     open filename as file_in for reading
 
@@ -49,6 +49,22 @@ def load_items(filename):
     file_in.close()
     return file_lines_list
 
+"""
+Pseudocode function hiring_an_item:
+
+function hiring_an_item(items_list)
+    count = 0
+        for each item in items_list
+            if item[3] == in
+               item_description = item[0] + "(" + item[1] + ")"
+                display count + " - " + item_description (formatted to 39 spaces) + " = $ " + item[2] (formatted to 7 spaces and 2 decimal places)
+                count += 1
+        display enter item number
+        get item_choice
+        items_list[item_choice] = [items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out"]
+        display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
+"""
+
 
 """
 Pseudocode function main:
@@ -78,14 +94,7 @@ function main()
                 count += 1
 
         else if user_input == "h"
-            count = 0
-            for each item in items_list
-                if item[3] == in
-                    display count + " - " + item[0] + " (" + item[1] + ") = $ " + item[2]
-            display enter item number
-            get item_choice
-            items_list[item_choice] = [items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out"]
-            display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
+
         else if user_input == "r"
             (return an item)
         else if user_input == "a"
