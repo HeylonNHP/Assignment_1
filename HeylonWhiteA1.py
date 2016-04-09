@@ -55,16 +55,36 @@ Pseudocode function hiring_an_item:
 function hiring_an_item(items_list)
     count = 0
         for each item in items_list
-            if item[3] == in
+            if item[3] == "in"
                item_description = item[0] + "(" + item[1] + ")"
                 display count + " - " + item_description (formatted to 39 spaces) + " = $ " + item[2] (formatted to 7 spaces and 2 decimal places)
-                count += 1
+            count += 1
         display enter item number
         get item_choice
-        items_list[item_choice] = [items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out"]
-        display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
+        if items_list[item_choice][3] == "out"
+            display item not on hire
+        else
+            items_list[item_choice] = (items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out")
+            display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
+        return items_list
 """
+def hiring_an_item(items_list):
+    count = 0
+    for item in items_list:
+        if item[3] == "in":
+            item_description = "{} ({})".format(item[0], item[1])
+            print("{} - {:39} = ${:7.2f}".format(count, item_description, item[2]))
+        count += 1
 
+    print("Enter the number of an item to hire")
+    item_choice = int(input(">>> "))
+
+    if items_list[item_choice][3] == "out":
+        print("That item is not available for hire")
+    else:
+        items_list[item_choice] = (items_list[item_choice][0], items_list[item_choice][1], items_list[item_choice][2],"out")
+        print("{} hired for ${}".format(items_list[item_choice][0], items_list[item_choice][2]))
+    return items_list
 
 """
 Pseudocode function main:
@@ -94,7 +114,7 @@ function main()
                 count += 1
 
         else if user_input == "h"
-
+            items_list == hiring_an_item(items_list)
         else if user_input == "r"
             (return an item)
         else if user_input == "a"
@@ -130,6 +150,9 @@ def main():
                 item_description = "{} ({})".format(item[0], item[1])
                 print("{} - {:39} = ${:7.2f} {}".format(count, item_description, item[2], hire_status))
                 count += 1
+
+        elif user_input == "h":
+            items_list == hiring_an_item(items_list)
         print(MENU)
         user_input = input(">>> ").lower()
 main()
