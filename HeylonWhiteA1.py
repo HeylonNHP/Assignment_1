@@ -61,11 +61,12 @@ function hiring_an_item(items_list)
             count += 1
         display enter item number
         get item_choice
-        if items_list[item_choice][3] == "out"
-            display item not on hire
-        else
-            items_list[item_choice] = (items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2],"out")
+        if (item_choice >= 0 and item_choice < len(items_list)) and items_list[item_choice][3] == "in"
+            items_list[item_choice] = (items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2], "out")
             display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2]
+        else
+            display item not on hire
+
         return items_list
 """
 def hiring_an_item(items_list):
@@ -77,13 +78,18 @@ def hiring_an_item(items_list):
         count += 1
 
     print("Enter the number of an item to hire")
-    item_choice = int(input(">>> "))
+    try:
+        item_choice = int(input(">>> "))
+    except:
+        print("Invalid input")
+        return items_list
 
-    if items_list[item_choice][3] == "out":
-        print("That item is not available for hire")
-    else:
-        items_list[item_choice] = (items_list[item_choice][0], items_list[item_choice][1], items_list[item_choice][2],"out")
+    # check if item choice is inside the bounds of the list, and is currently not hired out
+    if (item_choice >= 0 and item_choice < len(items_list)) and items_list[item_choice][3] == "in":
+        items_list[item_choice] = (items_list[item_choice][0], items_list[item_choice][1], items_list[item_choice][2], "out")
         print("{} hired for ${}".format(items_list[item_choice][0], items_list[item_choice][2]))
+    else:
+        print("That item is not available for hire")
     return items_list
 
 """
@@ -114,7 +120,7 @@ function main()
                 count += 1
 
         else if user_input == "h"
-            items_list == hiring_an_item(items_list)
+            items_list = hiring_an_item(items_list)
         else if user_input == "r"
             (return an item)
         else if user_input == "a"
@@ -152,7 +158,7 @@ def main():
                 count += 1
 
         elif user_input == "h":
-            items_list == hiring_an_item(items_list)
+            items_list = hiring_an_item(items_list)
         print(MENU)
         user_input = input(">>> ").lower()
 main()
