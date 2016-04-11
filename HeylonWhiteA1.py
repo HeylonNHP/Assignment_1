@@ -170,7 +170,33 @@ def returning_an_item(items_list):
     print("{} returned".format(items_list[item_choice][0]))
     return items_list
 
+def add_new_item(items_list):
+    item_name = input("Item name: ")
+    while item_name == "":
+        print("Input can not be blank")
+        item_name = input("Item name: ")
+    item_description = input("Description: ")
+    while item_description == "":
+        print("Input can not be blank")
+        item_description = input("Description: ")
 
+    item_price = ""
+    try:
+        item_price = float(input("Price per day: $"))
+    except:
+        print("Invalid input; enter a valid number")
+
+    while item_price == "" or item_price <= 0:
+        if item_price != "":
+            print("Price must be >= $0")
+            print("Invalid input; enter a valid number")
+        try:
+            item_price = float(input("Price per day: $"))
+        except:
+            print("Invalid input; enter a valid number")
+
+    items_list.append((item_name, item_description, item_price, "in"))
+    return items_list
 
 
 """
@@ -244,6 +270,8 @@ def main():
             items_list = hiring_an_item(items_list)
         elif user_input == "r":
             items_list = returning_an_item(items_list)
+        elif user_input == "a":
+            items_list = add_new_item(items_list)
         print(MENU)
         user_input = input(">>> ").lower()
 main()
