@@ -17,7 +17,7 @@ function load_items(filename)
     open filename as file_in for reading
 
     for each line in filename.readlines()
-        strip white spaces and new line chars from line
+        strip line
         line_item_list = split line by ","
 
         line_item_list[0] = string of line_item_list[0]
@@ -25,7 +25,7 @@ function load_items(filename)
         line_item_list[2] = float of line_item_list[2]
         line_item_list[3] = string of line_item_list[3]
 
-        append line_item_list converted to tuple to file_lines_list
+        append line_item_list to file_lines_list
 
     close file_in
     return file_lines_list
@@ -66,15 +66,15 @@ function hiring_an_item(items_list)
         for each item in items_list
             if item[3] == "in"
                 items_available = True
-                item_description = item[0] + "(" + item[1] + ")"
-                display count + " - " + item_description (formatted to 39 spaces) + " = $ " + item[2] (formatted to 7 spaces and 2 decimal places)
+                item_description = item[0],item[1]
+                display count,item_description,item[2]
             count += 1
 
             if items_available == False
                 display No items available message
                 return items_list
 
-        display enter item number
+        display Enter item number
 
         try
             get item_choice
@@ -84,7 +84,7 @@ function hiring_an_item(items_list)
 
         if (item_choice >= 0 and item_choice < len(items_list)) and items_list[item_choice][3] == "in"
             items_list[item_choice] = (items_list[item_choice][0],items_list[item_choice][1],items_list[item_choice][2], "out")
-            display items_list[item_choice][0] + "hired for $" + items_list[item_choice][2] formatted to 2 decimal places
+            display items_list[item_choice][0],items_list[item_choice][2]
         else
             display Item not on hire message
 
@@ -212,17 +212,17 @@ def add_new_item(items_list):
 Pseudocode function main:
 
 function main()
-    display welcome message
+    display Welcome message
 
     items_list = load_items(ITEMS_FILE_NAME)
-    display length of items_list + "items loaded from " + ITEMS_FILE_NAME
+    display length of items_list,ITEMS_FILE_NAME
 
     display menu
     get user_input (to lowercase)
 
     while user_input != "q"
         if user_input == "l"
-            display items on file
+            display Items on file
             count = 0
 
             for each item in items_list
@@ -232,7 +232,7 @@ function main()
                     hire_status = ""
 
                 item_description = item[0] + "(" + item[1] + ")"
-                display count + " - " + item_description (formatted to 39 spaces) + " = $ " + item[2] (formatted to 7 spaces and 2 decimal places) + " " + hire_status
+                display count,item_description,item[2],hire_status
                 count += 1
 
         else if user_input == "h"
@@ -248,8 +248,8 @@ function main()
         get user_input (to lowercase)
 
     save_items(items_list,ITEMS_FILE_NAME)
-    display amount of items saved message
-    display goodbye message
+    display Amount of items saved message
+    display Goodbye message
 
 """
 def main():
