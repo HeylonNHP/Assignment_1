@@ -204,6 +204,7 @@ def add_new_item(items_list):
             print("Invalid input; enter a valid number")
 
     items_list.append((item_name, item_description, item_price, "in"))
+    print("{} ({}), ${:.2f} now available for hire".format(item_name, item_description, item_price))
     return items_list
 
 
@@ -246,7 +247,7 @@ function main()
         display menu
         get user_input (to lowercase)
 
-    (save to csv)
+    save_items(items_list,ITEMS_FILE_NAME)
     display amount of items saved message
     display goodbye message
 
@@ -280,14 +281,13 @@ def main():
             items_list = returning_an_item(items_list)
         elif user_input == "a":
             items_list = add_new_item(items_list)
+        else:
+            print("Invalid menu choice")
         print(MENU)
         user_input = input(">>> ").lower()
 
     save_items(items_list,ITEMS_FILE_NAME)
     print("{} items saved to {}".format(len(items_list), ITEMS_FILE_NAME))
     print("Have a nice day :)")
+
 main()
-
-# rgewegre
-
-
