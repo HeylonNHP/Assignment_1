@@ -49,6 +49,14 @@ def load_items(filename):
     file_in.close()
     return file_lines_list
 
+def save_items(items_list, filename):
+    file_out = open(filename, "w")
+    for item in items_list:
+        file_out.write("{},{},{},{}".format(item[0], item[1], item[2], item[3]) + "\n")
+    file_out.close()
+
+
+
 """
 Pseudocode function hiring_an_item:
 
@@ -231,7 +239,7 @@ function main()
         else if user_input == "r"
             (return an item)
         else if user_input == "a"
-            (add new item to stock)
+            items_list = add_new_item(items_list)
         else
             display Invalid menu choice message
 
@@ -274,6 +282,10 @@ def main():
             items_list = add_new_item(items_list)
         print(MENU)
         user_input = input(">>> ").lower()
+
+    save_items(items_list,ITEMS_FILE_NAME)
+    print("{} items saved to {}".format(len(items_list), ITEMS_FILE_NAME))
+    print("Have a nice day :)")
 main()
 
 # rgewegre
