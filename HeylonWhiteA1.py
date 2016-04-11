@@ -101,7 +101,7 @@ def hiring_an_item(items_list):
     try:
         item_choice = int(input(">>> "))
     except:
-        print("Invalid input")
+        print("Invalid input; enter a number")
         return items_list
 
     # check if item choice is inside the bounds of the list, and is currently not hired out
@@ -112,6 +112,66 @@ def hiring_an_item(items_list):
         print("That item is not available for hire")
 
     return items_list
+
+def returning_an_item(items_list):
+    count = 0
+    items_to_return = False
+    for item in items_list:
+        if item[3] == "out":
+            items_to_return = True
+            item_description = "{} ({})".format(item[0], item[1])
+            print("{} - {:39} = ${:7.2f}".format(count, item_description, item[2]))
+        count += 1
+
+    if items_to_return == False:
+        print("No items are currently on hire")
+        return items_list
+
+    print("Enter the number of an item to return")
+
+    valid_input = ""
+    item_choice = -1
+    try:
+        item_choice = int(input(">>> "))
+    except:
+        print("Invalid input; enter a number")
+        valid_input = False
+
+    if valid_input == "":
+        if (item_choice >= 0 and item_choice < len(items_list)):
+            if items_list[item_choice][3] == "out":
+                valid_input = True
+            else:
+                print("That item is not on hire")
+                return items_list
+        else:
+            print("Invalid item number")
+
+
+    while valid_input != True:
+        valid_input = ""
+        try:
+            item_choice = int(input(">>> "))
+        except:
+            print("Invalid input; enter a number")
+            valid_input = False
+
+        if valid_input == "":
+            if (item_choice >= 0 and item_choice < len(items_list)):
+                if items_list[item_choice][3] == "out":
+                    valid_input = True
+                else:
+                    print("That item is not on hire")
+                    return items_list
+            else:
+                print("Invalid item number")
+
+    items_list[item_choice] = (items_list[item_choice][0], items_list[item_choice][1], items_list[item_choice][2], "in")
+    print("{} returned".format(items_list[item_choice][0]))
+    return items_list
+
+
+
 
 """
 Pseudocode function main:
@@ -146,6 +206,8 @@ function main()
             (return an item)
         else if user_input == "a"
             (add new item to stock)
+        else
+            display Invalid menu choice message
 
         display menu
         get user_input (to lowercase)
@@ -180,6 +242,8 @@ def main():
 
         elif user_input == "h":
             items_list = hiring_an_item(items_list)
+        elif user_input == "r":
+            items_list = returning_an_item(items_list)
         print(MENU)
         user_input = input(">>> ").lower()
 main()
